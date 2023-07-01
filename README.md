@@ -1,8 +1,10 @@
+I got tired of manually cropping anime screenshots, so instead I wrote this.
 # letterboxRemover
 
-I got tired of manually cropping anime screenshots, so instead I wrote this.
+letterboxRemover is a simple python program which automatically removes the black bars from the edge of an image.
 
 ## Requirements
+letterboxRemover requires the followings to work:
 - Python 3
 - Pillow
 
