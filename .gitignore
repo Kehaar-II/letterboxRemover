@@ -1,0 +1,4 @@
+# Workspace Files
+*.code-workspace
+.vscode
+.gitignore
