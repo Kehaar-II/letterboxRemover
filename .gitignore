@@ -5,4 +5,7 @@
 
 # Test Files
 testImage*
-testFiles/*
+testFiles
+
+# Interpreter Files
+__pycache__
