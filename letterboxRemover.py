@@ -23,10 +23,10 @@ def fileSupported(filepath):
 def saveImage(img, originalPath):
     '''Image -> Image \n
     saves the image and converts it to png if the corresponding config value is True'''
-    if (cfg.default["convertToPng"]):
-        img = img.save(os.path.splitext(originalPath)[0] + ".png")
+    if (default["convertToPng"]):
+        img = img.save(os.path.splitext(originalPath)[0] + default["endString"] + ".png")
         return
-    img = img.save(originalPath)
+    img = img.save(os.path.splitext(originalPath)[0] + default["endString"] + os.path.splitext(originalPath)[1])
     return img
 
 def main():
@@ -44,7 +44,7 @@ def main():
 
     img = Image.open(filepath)
 
-    croppedImg = cropImage(img)
+    croppedImg = cropimage(img, default["blackLevelThreshold"])
 
     saveImage(croppedImg, filepath)
     return 0

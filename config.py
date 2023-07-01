@@ -1,4 +1,5 @@
 default = {
     "blackLevelThreshold": 10,
-    "convertToPng": True
+    "convertToPng": True,
+    "endString": "_cropped"
 }
