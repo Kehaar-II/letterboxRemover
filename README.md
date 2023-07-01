@@ -9,7 +9,7 @@ I got tired of manually cropping anime screenshots, so instead I wrote this.
 ## Usage
 
 ```bash
-$ python3 letterboxRemover.py filepath [aspect ratio]
+$ python3 letterboxRemover.py filepath [-b BLACK_LEVEL_THRESHOLD] [-n OUTPUT_FILEPATH]]
 ```
 
 <br>

@@ -20,14 +20,42 @@ def fileSupported(filepath):
             return 1
     return 0
 
-def saveImage(img, originalPath):
-    '''Image -> Image \n
-    saves the image and converts it to png if the corresponding config value is True'''
+def isJPG(path):
+    '''string -> bool'''
+    return path.lower().endswith(".jpeg") or path.lower().endswith(".jpg")
+
+def saveImage(img, originalPath, givenPath):
+    '''Image, string, string -> Image \n
+    saves the image and converts it to png if the corresponding config value is True \n
+    if givenPath is non empty the image will be saved to that location in the given format'''
+    if (givenPath != ""):
+        if (isJPG(givenPath)):
+            img = img.convert("RGB")
+        img = img.save(givenPath)
+        return
     if (default["convertToPng"]):
+        if (isJPG(originalPath)):
+            img = img.convert("RGB")
         img = img.save(os.path.splitext(originalPath)[0] + default["endString"] + ".png")
         return
+
+
+
     img = img.save(os.path.splitext(originalPath)[0] + default["endString"] + os.path.splitext(originalPath)[1])
     return img
+
+def get_args():
+    '''void -> int, string'''
+
+    threshold = default["blackLevelThreshold"]
+    name = ""
+
+    for i in range(2, len(sys.argv)):
+        if (sys.argv[i] == "-b" and i + 1 < len(sys.argv)):
+            threshold = int(sys.argv[i + 1])
+        if (sys.argv[i] == "-n" and i + 1 < len(sys.argv)):
+            name = sys.argv[i + 1]
+    return threshold, name
 
 def main():
     filepath = sys.argv[1]
@@ -41,12 +69,12 @@ def main():
     if (not fileSupported(filepath)):
         print('error: file is not an image', file=sys.stderr)
         return 1
+    threshold, name = get_args()
 
     img = Image.open(filepath)
+    croppedImg = cropimage(img, threshold)
 
-    croppedImg = cropimage(img, default["blackLevelThreshold"])
-
-    saveImage(croppedImg, filepath)
+    saveImage(croppedImg, filepath, name)
     return 0
 
 exit(main())
