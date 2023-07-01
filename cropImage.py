@@ -71,14 +71,14 @@ def cropimage(img, blacklevel):
     cpy = img.copy()
     x = cpy.size[0]
     y = cpy.size[1]
-    l_limit = 0
-    r_limit = x
-    t_limit = 0
-    b_limit = y
+    left = 0
+    right = x
+    top = 0
+    bottom = y
 
-    l_limit = get_l_limit(cpy, blacklevel)
-    r_limit = get_r_limit(cpy, blacklevel)
-    t_limit = get_t_limit(cpy, blacklevel)
-    b_limit = get_b_limit(cpy, blacklevel)
-    cpy = cpy.crop((l_limit, t_limit, r_limit, b_limit))
+    left = get_l_limit(cpy, blacklevel)
+    right = get_r_limit(cpy, blacklevel)
+    top = get_t_limit(cpy, blacklevel)
+    bottom = get_b_limit(cpy, blacklevel)
+    cpy = cpy.crop((left, top, right, bottom))
     return cpy

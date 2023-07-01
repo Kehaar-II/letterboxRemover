@@ -38,15 +38,11 @@ def saveImage(img, originalPath, givenPath):
             img = img.convert("RGB")
         img = img.save(os.path.splitext(originalPath)[0] + default["endString"] + ".png")
         return
-
-
-
     img = img.save(os.path.splitext(originalPath)[0] + default["endString"] + os.path.splitext(originalPath)[1])
     return img
 
 def get_args():
     '''void -> int, string'''
-
     threshold = default["blackLevelThreshold"]
     name = ""
 
