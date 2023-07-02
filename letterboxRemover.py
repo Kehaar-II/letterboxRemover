@@ -74,7 +74,4 @@ def main():
     saveImage(croppedImg, filepath, name)
     return 0
 
-# init()
 exit(main())
-
-# TODO: add configurable deadzone at the edge (mainly to dead with window's hideable taskbar)

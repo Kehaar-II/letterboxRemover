@@ -21,7 +21,7 @@ def get_t_limit(img, blacklevel):
     x = img.size[0]
     y = img.size[1]
 
-    i, j = getLimit(range(x), range(y), img, blacklevel)
+    i, j = getLimit(range(x), range(default["minCrop"]["top"], y), img, blacklevel)
     if (i == -1):
         return 0
     return max(j, 0)
@@ -29,7 +29,7 @@ def get_t_limit(img, blacklevel):
 def get_b_limit(img, blacklevel):
     '''Image, int -> int'''
     x = img.size[0]
-    y = img.size[1]
+    y = img.size[1] - default["minCrop"]["bottom"]
 
     for i in range(x):
         for j in reversed(range(y)):
@@ -51,14 +51,14 @@ def get_l_limit(img, blacklevel):
     x = img.size[0]
     y = img.size[1]
 
-    i, j = getLimit(range(x), range(y), img, blacklevel)
+    i, j = getLimit(range(default["minCrop"]["left"], x), range(y), img, blacklevel)
     if (i == -1):
         return 0
     return max(i, 0)
 
 def get_r_limit(img, blacklevel):
     '''Image, int -> int'''
-    x = img.size[0]
+    x = img.size[0] - default["minCrop"]["right"]
     y = img.size[1]
 
     i, j = getLimit(reversed(range(x)), range(y), img, blacklevel)
