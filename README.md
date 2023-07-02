@@ -11,7 +11,7 @@ letterboxRemover requires the followings to work:
 ## Usage
 
 ```bash
-$ python3 letterboxRemover.py filepath [options]
+$ python3 letterboxRemover.py filepath [-b BLACK_LEVEL_THRESHOLD] [-n OUTPUT_FILEPATH] [-l LEFT_LOWER_LIMIT TOP_LOWER_LIMIT BOTTOM_LOWER_LIMIT RIGHT_LOWER_LIMIT]
 ```
 
 ### Description
