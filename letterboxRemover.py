@@ -43,6 +43,10 @@ def saveImage(img, originalPath, givenPath):
     img = img.save(os.path.splitext(originalPath)[0] + default["endString"] + os.path.splitext(originalPath)[1])
     return img
 
+# TODO: user configurable lower limit
+
+# TODO: rewrite README to be more readable
+
 def get_args():
     '''void -> int, string'''
     threshold = default["blackLevelThreshold"]
@@ -53,6 +57,11 @@ def get_args():
             threshold = int(sys.argv[i + 1])
         if (sys.argv[i] == "-n" and i + 1 < len(sys.argv)):
             name = sys.argv[i + 1]
+        if (sys.argv[i] == "-l" and i + 4 < len(sys.argv)):
+            default["minCrop"]["left"] = int(sys.argv[i + 1])
+            default["minCrop"]["top"] = int(sys.argv[i + 2])
+            default["minCrop"]["bottom"] = int(sys.argv[i + 3])
+            default["minCrop"]["right"] = int(sys.argv[i + 4])
     return threshold, name
 
 def main():
