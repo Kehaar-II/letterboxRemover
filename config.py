@@ -1,5 +1,6 @@
-default = {
-    "blackLevelThreshold": 10,
-    "convertToPng": True,
-    "endString": "_cropped"
-}
+import json
+
+global default
+f = open("config.json")
+default = json.load(f)
+

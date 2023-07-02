@@ -33,11 +33,13 @@ def saveImage(img, originalPath, givenPath):
             img = img.convert("RGB")
         img = img.save(givenPath)
         return
-    if (default["convertToPng"]):
+    if (default["defaultFormat"]):
         if (isJPG(originalPath)):
             img = img.convert("RGB")
-        img = img.save(os.path.splitext(originalPath)[0] + default["endString"] + ".png")
+        img = img.save(os.path.splitext(originalPath)[0] + default["endString"] + default["defaultFormat"])
         return
+    if (isJPG(originalPath)):
+        img = img.convert("RGB")
     img = img.save(os.path.splitext(originalPath)[0] + default["endString"] + os.path.splitext(originalPath)[1])
     return img
 
@@ -54,11 +56,10 @@ def get_args():
     return threshold, name
 
 def main():
-    filepath = sys.argv[1]
-
     if (len(sys.argv) < 2):
         print('error: no image was given', file=sys.stderr)
         return 1
+    filepath = sys.argv[1]
     if (not fileExists(filepath)):
         print('error: file doesn\'t exist', file=sys.stderr)
         return 1
@@ -73,4 +74,7 @@ def main():
     saveImage(croppedImg, filepath, name)
     return 0
 
+# init()
 exit(main())
+
+# TODO: add configurable deadzone at the edge (mainly to dead with window's hideable taskbar)
