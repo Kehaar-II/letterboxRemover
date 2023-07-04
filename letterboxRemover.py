@@ -33,36 +33,33 @@ def saveImage(img, originalPath, givenPath):
             img = img.convert("RGB")
         img = img.save(givenPath)
         return
-    if (default["defaultFormat"]):
+    if (config["defaultFormat"]):
         if (isJPG(originalPath)):
             img = img.convert("RGB")
-        img = img.save(os.path.splitext(originalPath)[0] + default["endString"] + default["defaultFormat"])
+        img = img.save(os.path.splitext(originalPath)[0] + config["endString"] + config["defaultFormat"])
         return
     if (isJPG(originalPath)):
         img = img.convert("RGB")
-    img = img.save(os.path.splitext(originalPath)[0] + default["endString"] + os.path.splitext(originalPath)[1])
+    img = img.save(os.path.splitext(originalPath)[0] + config["endString"] + os.path.splitext(originalPath)[1])
     return img
 
-# TODO: user configurable lower limit
-
-# TODO: rewrite README to be more readable
-
 def get_args():
-    '''void -> int, string'''
-    threshold = default["blackLevelThreshold"]
+    '''void -> string'''
+    threshold = config["blackLevelThreshold"]
     name = ""
 
     for i in range(2, len(sys.argv)):
         if (sys.argv[i] == "-b" and i + 1 < len(sys.argv)):
-            threshold = int(sys.argv[i + 1])
+            # threshold = int(sys.argv[i + 1])
+            config["blackLevelThreshold"] = int(sys.argv[i + 1])
         if (sys.argv[i] == "-n" and i + 1 < len(sys.argv)):
             name = sys.argv[i + 1]
         if (sys.argv[i] == "-l" and i + 4 < len(sys.argv)):
-            default["minCrop"]["left"] = int(sys.argv[i + 1])
-            default["minCrop"]["top"] = int(sys.argv[i + 2])
-            default["minCrop"]["bottom"] = int(sys.argv[i + 3])
-            default["minCrop"]["right"] = int(sys.argv[i + 4])
-    return threshold, name
+            config["minCrop"]["left"] = int(sys.argv[i + 1])
+            config["minCrop"]["top"] = int(sys.argv[i + 2])
+            config["minCrop"]["bottom"] = int(sys.argv[i + 3])
+            config["minCrop"]["right"] = int(sys.argv[i + 4])
+    return name
 
 def main():
     if (len(sys.argv) < 2):
@@ -75,10 +72,10 @@ def main():
     if (not fileSupported(filepath)):
         print('error: file is not an image', file=sys.stderr)
         return 1
-    threshold, name = get_args()
+    name = get_args()
 
     img = Image.open(filepath)
-    croppedImg = cropimage(img, threshold)
+    croppedImg = cropimage(img)
 
     saveImage(croppedImg, filepath, name)
     return 0

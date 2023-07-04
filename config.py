@@ -1,6 +1,5 @@
 import json
 
-global default
+global config
 f = open("config.json")
-default = json.load(f)
-
+config = json.load(f)
